@@ -15,7 +15,7 @@ In our app, we're also gonna use CSS directly to change its colors, therefore it
     --secondary-text: white;
     }
 
-:rootis a pseudo element that simply represents the root node, which will make the colors available in all elements. Normally, it works like JavaScript's scoping system and it will make variables available only to the current node and to its children, NOT its parents. CSS vars can be used like so:
+:root is a pseudo element that simply represents the root node, which will make the colors available in all elements. Normally, it works like JavaScript's scoping system and it will make variables available only to the current node and to its children, NOT its parents. CSS vars can be used like so:
 
     color: var(--primary-text);
     background-color: var(--primary-bg);
