@@ -3,7 +3,8 @@ import React from 'react';
 import moment from 'moment';
 import {List, ListItem} from '@material-ui/core';
 import styled from 'styled-components';
-import {useState, useMemo} from 'react';
+import {useCallback, useState, useMemo} from 'react';
+import {History} from 'history';
 
 const Container = styled.div `
   height: calc(100% - 56px);
@@ -68,15 +69,21 @@ const getChatsQuery = `
 
 // const ChatsList = () => (     <Container>         <StyledList>
 // {chats.map((chat) => (                 <StyledListItem key={chat.id} button>
-//                   <ChatPicture src={chat.picture} alt="Profile"/>
-// <ChatInfo>                         <ChatName>{chat.name}</ChatName>
-//              {chat.lastMessage && ( <React.Fragment>
-// <MessageContent>{chat.lastMessage.content}</MessageContent>
-// <MessageDate> {moment(chat.lastMessage.createdAt).format('HH:mm')}
-// </MessageDate>                             </React.Fragment>               )}
-//                     </ChatInfo> </StyledListItem>             ))}
-// </StyledList>     </Container> ); chapter 3 _ with react hooks
-const ChatsList = () => {
+//                  <ChatPicture src={chat.picture} alt="Profile"/> <ChatInfo>
+//                       <ChatName>{chat.name}</ChatName>
+// {chat.lastMessage && ( <React.Fragment>
+// <MessageContent>{chat.lastMessage.content}</MessageContent> <MessageDate>
+// {moment(chat.lastMessage.createdAt).format('HH:mm')} </MessageDate>
+//                   </React.Fragment>               )}
+// </ChatInfo> </StyledListItem>             ))} </StyledList>     </Container>
+// ); chapter 3 _ with react hooks
+
+interface ChatsListProps {
+    history : History;
+}
+
+// const ChatsList = () => {
+const ChatsList : React.FC < ChatsListProps > = ({history}) => {
     const [chats,
         setChats] = useState < any[] > ([]);
     useMemo(async() => {
@@ -94,11 +101,20 @@ const ChatsList = () => {
             }} = await body.json();
         setChats(chats);
     }, []);
+
+    const navToChat = useCallback((chat) => {
+        history.push(`chats/${chat.id}`);
+    }, [history]);
+
     return (
         <Container>
             <StyledList>
                 {chats.map((chat) => (
-                    <StyledListItem key={chat.id} button>
+                    <StyledListItem
+                        key={chat.id}
+                        data-testid="chat"
+                        button
+                        onClick={navToChat.bind(null, chat)}>                          
                         <ChatPicture data-testid="picture" src={chat.picture} alt="Profile"/>
                         <ChatInfo>
                             <ChatName data-testid="name">{chat.name}</ChatName>
