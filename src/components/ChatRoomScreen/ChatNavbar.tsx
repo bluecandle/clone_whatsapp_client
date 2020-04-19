@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import {History} from 'history';
 import {ChatQueryResult} from './index';
 
+// ============================== style set ============================== //
 const Container = styled(Toolbar)`
   padding: 0;
   display: flex;
@@ -31,10 +32,16 @@ const Picture = styled.img `
 const Name = styled.div `
   line-height: 56px;
 `;
+
+// ============================== style set ============================== //
+
+// ============================== query interface set ============================== //
 interface ChatNavbarProps {
     history : History;
     chat : ChatQueryResult;
 }
+// ============================== query interface set ============================== //
+
 const ChatNavbar : React.FC < ChatNavbarProps > = ({chat, history}) => {
     const navBack = useCallback(() => {
         history.replace('/chats');
@@ -49,4 +56,5 @@ const ChatNavbar : React.FC < ChatNavbarProps > = ({chat, history}) => {
         </Container>
     );
 };
+
 export default ChatNavbar;
