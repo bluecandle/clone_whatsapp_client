@@ -5,7 +5,7 @@ import React from 'react';
 import {useCallback} from 'react';
 import styled from 'styled-components';
 import {History} from 'history';
-import {ChatQueryResult} from './index';
+import {ChatQueryResult} from './index_me';
 
 // ============================== style set ============================== //
 const Container = styled(Toolbar)`

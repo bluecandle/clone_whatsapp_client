@@ -8,6 +8,7 @@ import {useCallback} from 'react';
 import {History} from 'history';
 import gql from 'graphql-tag';
 import {useQuery} from '@apollo/react-hooks';
+import * as queries from '../../graphql/queries';
 
 const Container = styled.div `
   height: calc(100% - 56px);
@@ -56,20 +57,20 @@ const MessageDate = styled.div `
 `;
 
 // const getChatsQuery = `
-export const getChatsQuery = gql `
-  query GetChats {
-    chats {
-      id
-      name
-      picture
-      lastMessage {
-        id
-        content
-        createdAt
-      }
-    }
-  }
-`;
+// export const getChatsQuery = gql `
+//   query GetChats {
+//     chats {
+//       id
+//       name
+//       picture
+//       lastMessage {
+//         id
+//         content
+//         createdAt
+//       }
+//     }
+//   }
+// `;
 
 // const ChatsList = () => (     <Container>         <StyledList>
 // {chats.map((chat) => (                 <StyledListItem key={chat.id} button>
@@ -96,7 +97,9 @@ const ChatsList : React.FC < ChatsListProps > = ({history}) => {
     // {data: {             chats         }} = await body.json();
     // setChats(chats); }, []);
 
-    const {data} = useQuery < any > (getChatsQuery);
+    // query 파일에 다 몰아넣고 사용.
+    // const {data} = useQuery < any > (getChatsQuery);
+    const { data } = useQuery<any>(queries.chats);
 
     const navToChat = useCallback((chat) => {
         history.push(`chats/${chat.id}`);

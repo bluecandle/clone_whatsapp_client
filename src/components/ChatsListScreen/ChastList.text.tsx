@@ -8,6 +8,7 @@ import {cleanup, render, waitFor, fireEvent, screen} from '@testing-library/reac
 import {createBrowserHistory} from 'history';
 import {mockApolloClient} from '../../test-helpers';
 import ChatsList, {getChatsQuery} from './ChatsList';
+import * as queries from '../../graphql/queries';
 
 describe('ChatsList', () => {
     // afterEach(cleanup);
@@ -29,9 +30,7 @@ describe('ChatsList', () => {
         // 'https://localhost:4000/picture.jpg',           lastMessage: {
         const client = mockApolloClient([
             {
-                request: {
-                    query: getChatsQuery
-                },
+                request: { query: queries.chats },
                 result: {
                     data: {
                         chats: [
@@ -85,9 +84,7 @@ describe('ChatsList', () => {
 
         const client = mockApolloClient([
             {
-                request: {
-                    query: getChatsQuery
-                },
+                request: { query: queries.chats },
                 result: {
                     data: {
                         chats: [

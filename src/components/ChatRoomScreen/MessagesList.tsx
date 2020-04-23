@@ -3,7 +3,7 @@ import React from 'react';
 import {useEffect, useRef} from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
-import {ChatQueryMessage} from './index';
+import {ChatQueryMessage} from './index_me';
 const Container = styled.div `
   display: block;
   flex: 2;
